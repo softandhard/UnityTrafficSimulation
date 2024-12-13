@@ -1,7 +1,5 @@
-# Fast_Online_MTMCT
+# 基于特征融合的在线多目标多相机车辆跟踪
 
-Official code for "Fast online multi-target multi-camera tracking for vehicles"
- - https://link.springer.com/article/10.1007/s10489-023-05081-7
 
 ## Environment
 Developed in python3.8, pytorch 1.12
@@ -12,7 +10,10 @@ Developed in python3.8, pytorch 1.12
 - code
   - 1. train_feat_ext
   - 2. online_MTMC
+  - 3. data_process
+  - 4. eval
+
 
 - dataset
-  - AIC19
+  - AIC2022
   - VeRi-776
