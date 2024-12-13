@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Joystick</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .joystick-container {
+            display: inline-block;
+            position: relative;
+        }
+
+        .joystick-base {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #ddd;
+            position: relative;
+        }
+
+        .joystick-handle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #555;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            touch-action: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="joystick-container">
+        <div class="joystick-base">
+            <div class="joystick-handle" id="joystick"></div>
+        </div>
+    </div>
+    <div>
+        <p>Joystick Position: <span id="joystickPosition">0, 0</span></p>
+    </div>
+
+    <script>
+        const joystick = document.getElementById('joystick');
+        const joystickPositionDisplay = document.getElementById('joystickPosition');
+        const joystickBase = document.querySelector('.joystick-base');
+        const joystickBaseRadius = joystickBase.clientWidth / 2;
+        const joystickHandleRadius = joystick.clientWidth / 2;
+
+        let startX, startY;
+
+        joystick.addEventListener('mousedown', handleStart, false);
+        document.addEventListener('mousemove', handleMove, false);
+        document.addEventListener('mouseup', handleEnd, false);
+
+        joystick.addEventListener('touchstart', handleStart, false);
+        joystick.addEventListener('touchmove', handleMove, false);
+        joystick.addEventListener('touchend', handleEnd, false);
+
+        function handleStart(event) {
+            event.preventDefault();
+            const rect = joystickBase.getBoundingClientRect();
+            startX = rect.left + joystickBaseRadius;
+            startY = rect.top + joystickBaseRadius;
+        }
+
+        function handleMove(event) {
+            if (event.buttons === 1 || event.touches) {
+                let clientX, clientY;
+
+                if (event.touches) {
+                    clientX = event.touches[0].clientX;
+                    clientY = event.touches[0].clientY;
+                } else {
+                    clientX = event.clientX;
+                    clientY = event.clientY;
+                }
+
+                let deltaX = clientX - startX;
+                let deltaY = clientY - startY;
+
+                // 计算距离并限制手柄在基座圆形范围内
+                let distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                let maxDistance = joystickBaseRadius - joystickHandleRadius;
+
+                if (distance > maxDistance) {
+                    deltaX *= maxDistance / distance;
+                    deltaY *= maxDistance / distance;
+                }
+
+                // 更新手柄位置，保持transform偏移，使手柄的中心保持正确
+                joystick.style.transform = `translate(${deltaX}px, ${deltaY}px) translate(-50%, -50%)`;
+                updateJoystickPosition(deltaX, deltaY);
+            }
+        }
+
+        function handleEnd() {
+            joystick.style.transform = 'translate(-50%, -50%)';
+            updateJoystickPosition(0, 0);
+        }
+
+        function updateJoystickPosition(x, y) {
+            joystickPositionDisplay.innerText = `${x.toFixed(2)}, ${y.toFixed(2)}`;
+            console.log(`Joystick Position: X=${x.toFixed(2)}, Y=${y.toFixed(2)}`);
+        }
+    </script>
+</body>
+</html>

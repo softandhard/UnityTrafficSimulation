@@ -1,0 +1,234 @@
+IDF1   IDP   IDR
+
+yolov7: e6e , resnet50
+
+resnet-CBAM-无数据增强-20-iou=0.8:  64.29 66.56 62.17  /  64.48 66.76 62.35
+resnet-CBAM-无数据增强-60-iou=0.8:  67.56 67.75 67.37  /  67.75 67.93 67.56
+resnet-无数据增强-10-iou=0.8:  69.06 67.88 70.29
+resnet-无数据增强-20-iou=0.8:  65.69 66.37 65.03
+resnet-无数据增强-30-iou=0.8:  69.40 71.00 67.87
+resnet-论文方法-30-0.8:  64.95 73.00 58.50
+
+resnet-论文方法-120-0.8-加入classifier-无bnn:  71.96 69.28 74.85
+resnet-论文方法-120-0.8-加入classifier-无bnn-调整classifier:  71.16 68.57 73.95
+resnet-论文方法-120-0.8-加入classifier-有bnn:  70.01 67.16 73.12
+
+
+训练加入classifier
+se_resnext-有数据增强-120-iou=0.8-size=384-加入classifier-AvgPool2d((8, 4), 7):  72.31 69.41 75.46
+se_resnext-有数据增强-120-iou=0.8-size=384-无classifier-AdaptiveAvgPool2d(1) :  73.14 69.88 76.73
+se_resnext-有数据增强-60-iou=0.8-size=384-无classifier-AdaptiveAvgPool2d(1) :  72.72 69.91 75.76
+se_resnext-有数据增强-90-iou=0.8-size=384-无classifier-AdaptiveAvgPool2d(1) :  72.24 69.40 75.32
+se_resnext-有数据增强-120-iou=0.8-size=384-无classifier-AvgPool2d((8, 4), 7):  73.20 70.03 76.67
+
+
+
+resnet101-测试结果-iou=0.8:  77.53 78.73 76.36
+resnet50-截取一半图像-iou=0.8:  74.20 76.54 72.00
+
+=====
+merge-resnet101-resnet50-取平均值-iou=0.6-加入act:  77.23 78.81 75.71
+merge-resnet101--resnet50-选择数值最小者-iou=0.6-加入act: 78.19 80.70 75.83
+=====
+merge-resnext-resnet50-选择数值最小者-iou=0.55-resnet加入act:  77.63 79.88 75.50
+merge-resnext-resnet50-取平均值-iou=0.6-resnet加入act-dists:  78.50 81.25 75.93
+
+merge-resnext--resnet50-取权平均值-iou=0.6-resnet加入act-cos_dists:  77.85 80.85 75.06
+=====
+
+
+---使用resnext和se_resnet
+merge-se_resnet-60-resnext-60-选择数值最小者-iou=0.6:  78.10 83.33 73.49
+merge-se_resnet-60-resnext-60-取平均值-iou=0.6:  77.92 83.30 73.19
+merge-se_resnet-60-resnext-60-取平均值-iou=0.6-single:  77.98 83.37 73.25
+
+resnext-60-se_resnet-60-single:  75.68 84.13 68.77
+resnext-60-se_resnet-60-complete: 77.42 84.60 71.35
+resnext-60-se_resnet-120-complete:  77.38 84.80 71.15
+
+使用VeRi: merge-resnext-60-se_resnet-120-选择最小值-iou=0.6-complete-动态调整confidence-调整量0.01:  76.03 81.58 71.18
+
+===多相机关联处理对追踪结果无提升===
+merge-se_resnet-resnext-multi_all-单相机和多相机取平均值-iou=0.6:  75.54 83.05 69.28
+
+resnext-论文方法-90--iou=0.8-size=384-使用classifier:  72.68 69.82 75.78
+使用AIC19_S02.txt  resnext-论文方法-90--iou=0.6-size=384-使用bnn:  77.72 79.82 75.73
+使用ground_truth_test.txt  resnext-论文方法-90--iou=0.6-size=384-使用bnn:  78.04 80.14 76.05
+
+使用VeRi-使用ground_truth_test.txt  resnext-论文方法-90--iou=0.6-size=384-使用bnn:  78.38 80.22 76.62
+
+=====
+使用ground_truth_test.txt  resnext-论文方法-60--iou=0.6-size=384-使用bnn:  77.60 84.51 71.74
+使用ground_truth_test.txt  resnext-论文方法-60--iou=0.55-size=384-使用bnn:  78.27 85.11 72.45
+使用ground_truth_test.txt  resnext-论文方法-120--iou=0.55-size=384-使用bnn:  77.33 82.81 72.52
+=====
+使用ground_truth_test.txt  resnext-论文方法-30--iou=0.6-size=384-使用bnn:  77.31 84.12 71.51
+=====
+
+使用ground_truth_test.txt  resnext-论文方法-120--iou=0.55-size=384-使用bnn-merge_dataset-complete:  78.11 81.73 74.80
+使用ground_truth_test.txt  resnext-论文方法-150--iou=0.6-size=384-使用bnn-merge_dataset-complete:  76.84 81.23 72.89
+使用ground_truth_test.txt  resnext-论文方法-60--iou=0.6-size=384-使用bnn-merge_dataset-complete:  77.60 84.51 71.74
+使用ground_truth_test.txt  resnext-论文方法-60--iou=0.6-size=384-使用bnn-merge_dataset-single-VeRi:  75.88 84.00 69.20
+
+se_resnet
+
+使用ground_truth_test.txt  se_resnet-论文方法-120--iou=0.6-size=384-使用bnn:  78.48 83.73 73.85
+使用ground_truth_test.txt  se_resnet-论文方法-60--iou=0.6-size=384-使用bnn:  77.26 80.20 74.52
+
+使用ground_truth_test.txt  se_resnet-论文方法-60--iou=0.6-size=384-使用bnn-使用合并数据集:  77.99 80.90 75.28
+使用ground_truth_test.txt  se_resnet-论文方法-90--iou=0.6-size=384-使用bnn-使用合并数据集:  76.65 78.47 74.92
+
+使用VeRi: resnet50-deepsort-confidence-merge-complete-选择最小值-get_scene_feature(deepsort):  79.77 79.82 79.71
+使用VeRi: resnet101-deepsort-confidence-merge-complete-选择最小值-get_scene_feature(deepsort):  78.74 79.30 78.19
+
+使用VeRi: resnet101-deepsort-confidence-merge-complete-选择最小值-多相机处理-minimal:  78.95 78.90 78.99
+使用VeRi: resnet50-deepsort-confidence-merge-complete-选择最小值-多相机处理-minimal:  79.25 79.67 78.84
+
+yolov7: e6
+
+使用VeRi-使用ground_truth_test.txt  resnext-论文方法-90--iou=0.6-size=384-使用bnn: 76.56 75.88 77.25
+使用VeRi-使用ground_truth_test.txt  resnext-论文方法-120--iou=0.6-size=384-使用bnn:  78.28 81.53 75.29
+
+resnet50-论文方法-120-iou=0.8:  75.33 78.11 72.74
+
+deepsort-论文方法-30-iou==0.8-size=128--deepsort原始提取流程:  73.17 70.98 75.51
+resnet101-论文方法-120-iou=0.8:  76.36 77.26 75.49
+deepsort-数据增强AUG-120-iou==0.6-size=128--deepsort原始提取流程:  73.71 71.16 76.45
+deepsort-数据增强AUG-30-iou==0.8-size=128--deepsort原始提取流程:  72.13 70.05 74.34
+deepsort-数据增强AUG-50-iou==0.8-size=128--deepsort原始提取流程:  73.99 71.67 76.47
+=====
+使用AIC19_S02.txt, deepsort-数据增强AUG-60-iou==0.8-size=128--deepsort原始提取流程-ReLU:  75.19 72.86 77.68
+使用ground_truth_test.txt, deepsort-数据增强AUG-60-iou==0.6-size=128--deepsort原始提取流程-ReLU:  75.56 73.24 78.03
+使用ground_truth_test.txt, deepsort-数据增强AUG-60-iou==0.55-size=128--deepsort原始提取流程-ReLU:  75.73 73.22 78.42
+使用ground_truth_test.txt, deepsort-数据增强AUG-60-iou==0.55-size=128--deepsort原始提取流程-LeakyReLU:  75.81 73.19 78.63
+IDF1   IDP   IDR  MOTA:  75.81 73.19 78.63 78.97
+IDF1   IDP   IDR  MOTA    IDs:  75.81 73.19 78.63 78.97 108
+使用ground_truth_test.txt, deepsort-数据增强AUG-60-iou==0.6-size=128--deepsort原始提取流程-LeakyReLU-veri:  74.57 71.91 77.44
+使用ground_truth_test.txt, deepsort-数据增强AUG-60-iou==0.6-size=128--deepsort原始提取流程-LeakyReLU:  74.27 71.80 76.91
+使用ground_truth_test.txt, deepsort-数据增强AUG-60-iou==0.55-size=128--deepsort原始提取流程-ELU:  60.94 77.40 50.26
+使用ground_truth_test.txt, deepsort-数据增强AUG-60-iou==0.55-size=128--deepsort原始提取流程-Sigmoid:  71.57 69.88 73.35
+使用ground_truth_test.txt, deepsort-数据增强AUG-60-iou==0.55-size=128--drop/bn/relu提取流程-ReLU:  75.30 72.65 78.15
+=====
+使用ground_truth_test.txt, deepsort-kan-数据增强AUG-60-iou==0.6-size=128--deepsort原始提取流程-LeakyReLU-veri:  75.61 73.29 78.09
+使用ground_truth_test.txt, deepsort-kan-数据增强AUG-70-iou==0.55-size=128--deepsort原始提取流程-LeakyReLU-veri:  74.91 72.79 77.15
+使用ground_truth_test.txt, deepsort-kan-数据增强AUG-50-iou==0.55-size=128--deepsort原始提取流程-LeakyReLU-veri:  72.63 70.54 74.85
+使用ground_truth_test.txt, deepsort-kan-数据增强AUG-80-iou==0.6-size=128--deepsort原始提取流程-LeakyReLU-veri:  74.57 72.44 76.82
+使用ground_truth_test.txt, deepsort-kan-数据增强AUG-90-iou==0.6-size=128--deepsort原始提取流程-LeakyReLU-veri:  74.55 72.16 77.10
+使用ground_truth_test.txt, deepsort-kan-数据增强AUG-100-iou==0.6-size=128--deepsort原始提取流程-LeakyReLU-veri:  74.31 72.02 76.74
+
+deepsort-数据增强AUG-70-iou==0.8-size=128--deepsort原始提取流程:  72.97 70.80 75.27
+deepsort-数据增强AUG-80-iou==0.8-size=128--deepsort原始提取流程:  72.62 70.42 74.95
+deepsort-数据增强AUG-90-iou==0.8-size=128--deepsort原始提取流程:  73.17 71.00 75.47
+
+只处理外观特征
+merge-se_resnet-resnext-取平均值-iou=0.6:  76.94 81.82 72.61
+merge-se_resnet-resnext-选择最小值-iou=0.6:  76.93 81.81 72.60
+
+卡尔曼滤波的均值和方差平均处理
+merge-se_resnet-resnext-取平均值-iou=0.6:  76.94 81.82 72.61
+merge-se_resnet-resnext-选择最小值-iou=0.6:  76.93 81.81 72.60
+
+merge-resnext-60-se_resnet-120-取平均值-iou=0.6-linkage(p_dists, method='single')-动态调整confidence-调整量0.01:  77.17 82.06 72.82
+merge-resnext-60-se_resnet-120-选择最小值-iou=0.6-linkage(p_dists, method='single')-动态调整confidence-调整量0.01:  77.24 82.10 72.93
+使用VeRi: merge-resnext-60-se_resnet-120-选择最小值-iou=0.6-linkage(p_dists, method='single')-动态调整confidence-调整量0.01:  79.13 81.99 76.47
+使用VeRi: merge-resnext-60-se_resnet-120-取平均值-iou=0.6-linkage(p_dists, method='single')-动态调整confidence-调整量0.01:  78.75 81.50 76.19
+使用VeRi: merge-resnext-60-se_resnet-120-选择最小值-iou=0.6-linkage(p_dists, method='complete')-动态调整confidence-调整量0.01:  78.23 81.68 75.05
+
+
+yolov7: w6
+
+resnet50和resnet101
+merge-选择数值最小者-iou=0.8:  78.16 80.48 75.97
+merge-取平均值-iou=0.8:  77.88 80.19 75.69
+
+resnet101-论文方法-120-iou=0.8:  75.56 77.91 73.35
+resnet101-论文方法-120-iou=0.8-加入relu:  75.86 78.22 73.64
+resnet101-论文方法-120-iou=0.6-加入relu:  77.45 79.85 75.19
+
+
+resnxet-60-se_resnet-60
+
+===relu对结果没有影响===
+merge-se_resnet-resnext-取平均值-iou=0.6:  78.05 83.06 73.62
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-加入relu:  78.05 83.06 73.62
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-使用融合iou:  78.05 83.05 73.61
+merge-resnxet-60-se_resnet-60-选择最小值-iou=0.6:  77.78 83.01 73.17
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-linkage(p_dists, method='average'): 78.52 83.53 74.08
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-linkage(p_dists, method='weighted'):  78.52 83.53 74.08
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-linkage(p_dists, method='single'):  78.78 83.55 74.53
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-linkage(p_dists, method='single')-动态调整confidence-调整量0.01:  78.85 83.64 74.57
+merge-resnxet-60-se_resnet-120-取平均值-iou=0.6-linkage(p_dists, method='single')-动态调整confidence-调整量0.01:  78.94 83.79 74.62
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-linkage(p_dists, method='ward'):  77.61 82.87 72.98
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-linkage(p_dists, method='centroid'):  78.53 83.39 74.20
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-linkage(p_dists, method='median'):  78.53 83.39 74.20
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-动态调整confidence-调整量0.05:  76.85 82.19 72.17
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-动态调整confidence-调整量0.02:  78.01 82.90 73.67
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-动态调整confidence-调整量0.01:  78.16 83.10 73.78
+merge-resnxet-60-se_resnet-60-取平均值-iou=0.6-动态调整confidence-调整量0.005:  77.99 83.07 73.51
+se_resnet-120为主:  77.09 82.33 72.47
+se_resnet-60为主:  77.16 81.65 73.14
+
+
+merge-resnet50为主-deepsort-取平均值-iou=0.6-linkage(p_dists, method='complete')-动态调整confidence-调整量0.01:  77.45 79.28 75.71
+merge-resnet50为主-deepsort-取平均值-iou=0.55-linkage(p_dists, method='single')-动态调整confidence-调整量0.01-leakyrelu:  75.10 78.60 71.90
+merge-resnet50-deepsort为主-取平均值-iou=0.6-linkage(p_dists, method='complete')-动态调整confidence-调整量0.01-leakyrelu:  75.63 72.57 78.95
+使用VeRi:
+merge-resnet50-deepsort为主-选择最小值-iou=0.6-linkage(p_dists, method='complete')-动态调整confidence-调整量0.01-leakyrelu:  75.90 72.64 79.47
+merge-resnet50-deepsort为主-选择最小值-iou=0.6-linkage(p_dists, method='complete')-动态调整confidence-调整量0.01-leakyrelu:  75.63 72.57 78.95
+
+使用VeRi: merge-resnext-120-se_resnet-120-取平均值-iou=0.6-linkage(p_dists, method='single')-动态调整confidence-调整量0.01:  79.51 84.04 75.43
+使用VeRi: merge-resnext-120-se_resnet-120-选择最小值-iou=0.6-linkage(p_dists, method='single')-动态调整confidence-调整量0.01:  79.46 83.90 75.48
+使用VeRi: merge-resnext-120-se_resnet-120-选择最小值-iou=0.6-linkage(p_dists, method='complete')-动态调整confidence-调整量0.01:  79.08 84.04 74.67
+
+使用VeRi: resnext-120-se_resnet-120-confidence-merge-single-选择最小值-get_feature(resnext101)-动态调整confidence-调整量0.01:  78.60 82.91 74.71
+使用VeRi: resnext-120-se_resnet-120-confidence-merge-single-取平均值-get_feature(resnext101)-动态调整confidence-调整量0.01:  78.67 83.64 74.26
+使用VeRi: resnext-120-se_resnet-120-confidence-merge-complete-取平均值-get_feature(resnext101)-动态调整confidence-调整量0.01:  78.74 84.08 74.03
+使用VeRi: resnext-90-se_resnet-120-confidence-merge-single-取平均值-get_feature(resnext101)-动态调整confidence-调整量0.01:  77.56 77.50 77.62
+
+
+使用VeRi: resnet50-deepsort-confidence-merge-complete-选择最小值-get_feature(resnet50):  78.68 80.20 77.22
+使用VeRi: resnet50-deepsort-confidence-merge-complete-取平均值-get_feature(resnet50):  78.68 80.20 77.22
+使用VeRi: resnet50-deepsort-confidence-merge-single-取平均值-get_feature(resnet50):  76.44 79.63 73.50
+使用VeRi: resnet50-deepsort-confidence-merge-single-选择最小值-get_feature(resnet50):  76.44 79.63 73.50
+使用VeRi: resnet50-deepsort-confidence-merge-single-选择最小值-get_scene_feature(deepsort):  74.90 78.48 71.64
+///使用VeRi: resnet50-deepsort-confidence-merge-complete-选择最小值-get_scene_feature(deepsort):  78.87 79.23 78.53
+///使用VeRi: resnet101-deepsort-confidence-merge-complete-选择最小值-get_scene_feature(deepsort):  79.36 79.48 79.23
+使用VeRi: resnet50-resnet101-confidence-merge-complete-取平均值:  77.48 79.45 75.60
+
+yolov7: d6
+
+merge-se_resnet-resnext-取平均值-iou=0.6:  74.80 82.73 68.25
+merge-se_resnet-resnext-选择最小值-iou=0.6:  74.77 82.83 68.13
+使用VeRi: merge-resnext-60-se_resnet-120-选择最小值-iou=0.6-linkage(p_dists, method='single')-动态调整confidence-调整量0.01: 75.17 82.64 68.94
+使用VeRi: merge-resnext-60-se_resnet-120-取平均值-iou=0.6-linkage(p_dists, method='single')-动态调整confidence-调整量0.01:  75.07 82.61 68.79
+使用VeRi: merge-resnext-60-se_resnet-120-取平均值-iou=0.6-linkage(p_dists, method='complete')-动态调整confidence-调整量0.01:  76.94 82.55 72.04
+使用VeRi: merge-resnext-60-se_resnet-120-取平均值-iou=0.6-linkage(p_dists, method='complete')-动态调整confidence-调整量0.01:  76.95 82.57 72.04
+
+使用VeRi: resnext-120-se_resnet-120-confidence-merge-complete-选择最小值-get_feature(resnext101)-动态调整confidence-调整量0.01:  76.22 81.31 71.73
+使用VeRi: resnext-60-se_resnet-120-confidence-merge-complete-选择最小值-get_feature(resnext101)-动态调整confidence-调整量0.01:  73.91 81.48 67.63
+使用VeRi: resnext-120-se_resnet-120-confidence-merge-single-选择最小值-get_feature(resnext101)-动态调整confidence-调整量0.01:  77.12 81.77 72.97
+使用VeRi: resnext-120-se_resnet-120-confidence-merge-single-取平均值-get_feature(resnext101)-动态调整confidence-调整量0.01:  75.67 81.82 70.38
+使用VeRi: resnet50-deepsort-confidence-merge-complete-选择最小值-get_scene_feature(deepsort):  76.91 78.26 75.60
+
+
+yolov7: e6
+
+使用VeRi测试集效果更好
+resnet101 D:/Users/ddd/VeRi/AIC22/test/S02/： 79.20 79.59 78.82
+resnet101 D:/Users/ddd/AIC/AIC22/test/S02/： 78.86 79.49 78.25
+
+使用VeRi: resnet50-deepsort-confidence-merge-complete-选择最小值-get_scene_feature(deepsort):  77.97 78.08 77.86
+使用VeRi: resnet50-deepsort-confidence-merge-complete-选择最小值-get_feature(resnet50):  77.82 77.97 77.68
+使用VeRi: resnet50-deepsort-confidence-merge-single-选择最小值-get_scene_feature(deepsort):  74.76 76.26 73.33
+使用VeRi: resnet50-deepsort-confidence-merge-single-取平均值-get_scene_feature(deepsort):  74.76 76.26 73.33
+///使用VeRi: resnet101-deepsort-confidence-merge-complete-选择最小值-get_scene_feature(deepsort):  79.54 78.53 80.58
+
+使用VeRi: resnet101-deepsort-confidence-merge-complete-选择最小值-get_feature(resnet101):  77.82 77.97 77.68
+使用VeRi: resnet101-deepsort-confidence-merge-single-选择最小值-get_scene_feature(deepsort):   78.74 77.61 79.91
+使用VeRi: resnet50-deepsort-confidence-merge-complete-选择最小值-多相机处理-minimal:  77.54 77.33 77.75
+///使用VeRi: resnet101-deepsort-confidence-merge-complete-选择最小值-多相机处理-minimal-iou=0.6:  79.86 79.16 80.57
+使用VeRi: resnet101-deepsort-confidence-merge-complete-选择最小值-多相机处理-minimal-iou=0.55-截取一半图像:  80.00 79.62 80.39
+IDF1   IDP   IDR  MOTA IDs:  80.00 79.62 80.39 77.05  53
+使用VeRi: resnet101-deepsort-confidence-merge-complete-选择最小值-多相机处理-minimal-iou=0.55:  79.80 78.67 80.97
+IDF1   IDP   IDR  MOTA IDs:  79.80 78.67 80.97 78.61  52
+使用VeRi: resnet101-deepsort-confidence-merge-complete-选择最小值-多相机处理-average:  79.04 78.62 79.46

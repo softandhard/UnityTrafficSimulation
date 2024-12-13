@@ -1,0 +1,2 @@
+Epoch 1, CE Loss: 3.787932, Tri Loss: 0.710700, IDE Acc: 0.282975
+Epoch 2, CE Loss: 0.972664, Tri Loss: 0.495447, IDE Acc: 0.761082
