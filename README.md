@@ -21,6 +21,7 @@ Developed in python3.8, pytorch 1.13.1
   - VeRi-776
 
 ## 模型和权重文件下载地址
+
 yolov7-detector： https://pan.baidu.com/s/1WUG5JxIPzYvGz541SPxAeg 提取码: 6060
 pretrain_weight： https://pan.baidu.com/s/1LJfCWAQT2GXQ9Taiycjavg 提取码: 6060
 feature_extractor： https://pan.baidu.com/s/1mPgfBvJDTlmpRDbl95_RfA 提取码: 6060
