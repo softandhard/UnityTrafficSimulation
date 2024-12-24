@@ -25,3 +25,9 @@ Developed in python3.8, pytorch 1.13.1
 yolov7-detector： https://pan.baidu.com/s/1WUG5JxIPzYvGz541SPxAeg 提取码: 6060
 pretrain_weight： https://pan.baidu.com/s/1LJfCWAQT2GXQ9Taiycjavg 提取码: 6060
 feature_extractor： https://pan.baidu.com/s/1mPgfBvJDTlmpRDbl95_RfA 提取码: 6060
+
+## 数据集下载地址
+
+特征提取器训练数据集： https://pan.baidu.com/s/1hNXdJoQVLpWNLhzbmhPNyw 提取码: 6060
+测试数据集： https://pan.baidu.com/s/1BV9w1SjgY5-AypU0Ky7Vug 提取码: 6060 
+
